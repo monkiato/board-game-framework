@@ -1,0 +1,22 @@
+---
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: build test image
+    image: docker:latest
+    volumes:
+      - name: docker_sock
+        path: /var/run/docker.sock
+    commands:
+      - docker build --no-cache -t board-game-framework-tests:${DRONE_COMMIT} .
+
+  - name: run tests
+    image: board-game-framework-tests:${DRONE_COMMIT}
+
+trigger:
+  ref:
+    - refs/heads/master
+    - refs/pull/*/head
+    - refs/tags/*
