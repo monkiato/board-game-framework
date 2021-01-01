@@ -42,7 +42,7 @@ var cards = new List<ICard>
 _deck = new Deck(cards);
 ```
 
-Some of the main deck functionality:
+Some of the main deck functionalities:
 
 ```
 _deck.Shuffle()
@@ -64,7 +64,7 @@ More details in [Dice/](Source/BoardGame/Core/Dice/) folder
   
 ### Game State Flow
 
-The game state flow are based in 3 main components: game state controller, actions and state executors.
+The game state flow contains 3 main components: game state controller, actions and state executors.
 
 #### Game State Controller
 
@@ -72,7 +72,7 @@ The game state controller is an abstract implementation that requires to be exte
 the different states the game will use and executors associated to each state, as well for other custom
 components required to control the game logic.
 
-the abstract controller contains an internal player turn controller that works based on the list of player passed in the constructor. 
+The abstract controller contains an internal player turn controller that works based on the list of player passed in the constructor. 
 
 How to extend the game state controller:
 
@@ -120,7 +120,7 @@ How tu use actions:
 IGameState<ChessGameState> gameState = ...//obtain current game state from your main game manager
 
 var action = new MovePieceAction(Board board, Position from, To to);
-if (action.IsValid(gameState))
+if (action.IsLegal(gameState))
 {
     action.Apply(gameState); // trigger game state "PlayerMoving"
 }
